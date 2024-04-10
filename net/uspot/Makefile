@@ -8,9 +8,9 @@ PKG_MAINTAINER:=Thibaut VARÈNE <hacks@slashdirt.org>
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/f00b4r0/uspot.git
-PKG_SOURCE_DATE:=2023-11-30
-PKG_SOURCE_VERSION:=7e1e21b0f8425205d719b99a392fa893b3e512e6
-PKG_MIRROR_HASH:=494c616159b16d978fe00348ebe50c77a48f1db98d624ed613f3cca2d39e3a6e
+PKG_SOURCE_DATE:=2024-03-25
+PKG_SOURCE_VERSION:=094f0df88150ff2c351cfca4fabf76a7edcac79d
+PKG_MIRROR_HASH:=2ffc723e6560e76f53496b444568724d3c52a45ac143ca259096c3d20522de0f
 
 CMAKE_SOURCE_SUBDIR:=src
 
@@ -22,10 +22,11 @@ define Package/uspot
   SECTION:=net
   CATEGORY:=Network
   TITLE:=uspot hotspot daemon
+  EXTRA_DEPENDS:=ucode (>= 2023-11-07)
   DEPENDS:=+conntrack \
 	   +libblobmsg-json +liblucihttp-ucode +libradcli +libubox +libubus +libuci \
 	   +spotfilter \
-	   +ucode +ucode-mod-math +ucode-mod-nl80211 +ucode-mod-rtnl +uhttpd-mod-ucode +ucode-mod-uloop
+	   +ucode +ucode-mod-log +ucode-mod-math +ucode-mod-nl80211 +ucode-mod-rtnl +uhttpd-mod-ucode +ucode-mod-uloop
 
 endef
 
@@ -49,6 +50,7 @@ define Package/uspot-www
   CATEGORY:=Network
   TITLE:=uspot default user interface files
   DEPENDS:=+uspot
+  PKGARCH:=all
 endef
 
 define Package/uspot-www/description
@@ -62,7 +64,9 @@ define Package/uspotfilter
   TITLE:=uspot implementation of spotfilter
   PROVIDES:=spotfilter
   CONFLICTS:=spotfilter
+  EXTRA_DEPENDS:=ucode (>= 2023-11-07)
   DEPENDS:=+conntrack +nftables-json +ucode +ucode-mod-rtnl +ucode-mod-uloop
+  PKGARCH:=all
 endef
 
 define Package/uspotfilter/description
